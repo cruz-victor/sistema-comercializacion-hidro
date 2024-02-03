@@ -1,0 +1,195 @@
+<div class="container">
+  <h3>Información Contractual de Suministro (Buquesssssss</h3>
+  <hr>
+  
+  <form (ngSubmit)="submit()">
+      <div class="card">
+          <div class="card-body">
+              <p class="font-weight-bold">Identificación del Contrato:</p>
+              <div class="row">
+                  <div class="col-md-4">
+                      <div class="input-group input-group-sm mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputNumeroContrato">Número de contrato:</span>
+                          </div>
+                          <input  type="number" class="form-control" aria-describedby="inputNumeroContrato" 
+                                  [(ngModel)]="contrato.informacionGeneral.numeroContrato" [ngModelOptions]="{standalone: true}">
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                    <!-- pendent to review-->
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputIdTemporal">Identificador temporal:</span>
+                        </div>
+                        <input  type="text" class="form-control" aria-describedby="inputIdTemporal" 
+                                [(ngModel)]="contrato.informacionGeneral.idTemporal" [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+                  <div class="col-md-2">
+                      <div class="input-group input-group-sm mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGestion">Gestión:</span>
+                          </div>
+                          <input  type="number" class="form-control" aria-describedby="inputGestion" 
+                                  [(ngModel)]="contrato.informacionGeneral.gestion" [ngModelOptions]="{standalone: true}">
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md">
+                      <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                          <label class="input-group-text" for="inputGroupSelectSectorSector">Sector:</label>
+                        </div>
+                        <select class="custom-select" id="inputGroupSelectSectorSector" [(ngModel)]="contrato.informacionEspecifica.sector" [ngModelOptions]="{standalone: true}">
+                          <option>Seleccionar...</option>
+                          <option *ngFor="let op of sectores" [value]="op.codigo">{{op.valor}}</option>
+                        </select>
+                      </div>
+                  </div>
+                  <div class="col-md">
+                      <div class="input-group input-group-sm mb-3">
+                          <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelectProducto">Producto:</label>
+                          </div>
+                          <select class="custom-select" id="inputGroupSelectProducto" [(ngModel)]="contrato.informacionEspecifica.producto" [ngModelOptions]="{standalone: true}">
+                            <option>Seleccionar...</option>
+                            <option *ngFor="let op of productos" [value]="op.codigo">{{op.valor}}</option>
+                          </select>
+                      </div>
+                  </div>
+              </div>      
+              <div class="row">
+                <div class="col-md">
+                  <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputDescripcion">Descripción:</span>
+                    </div>
+                    <input  type="text" class="form-control" aria-describedby="inputDescripcion" 
+                            [(ngModel)]="contrato.informacionEspecifica.descripcionContrato" [ngModelOptions]="{standalone: true}">
+                </div>                
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col-md">
+                      <!-- <div class="input-group input-group-sm mb-3">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text" id="inputFechaSuscripcion">Fecha de Suscripción:</span>
+                          </div>
+                          <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker" 
+                                [(ngModel)]="fechaSuscripcion" [ngModelOptions]="{standalone: true}" (ngModelChange)="buildDateSuscripcion($event)">
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                          </div>
+                      </div> -->
+                  </div>
+                  <div class="col-md">
+                      <!-- <div class="input-group input-group-sm mb-3">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text" id="inputFechaFinal">Fecha de Finalización:</span>
+                          </div>
+                          <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d2="ngbDatepicker" 
+                                [(ngModel)]="fechaFinalizacion" [ngModelOptions]="{standalone: true}" (ngModelChange)="buildDateFinalizacion($event)">
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"></button>
+                          </div>
+                      </div>            -->
+                  </div>
+              </div>
+              <hr>
+              <p class="font-weight-bold">Nominación de Volumen:</p>
+              <div class="row">
+                  <div class="col-md">
+                      <div class="input-group input-group-sm mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputVolumenNominado">Volúmen nominado:</span>
+                          </div>
+                          <input  type="number" class="form-control" aria-describedby="inputVolumenNominado"
+                                  [(ngModel)]="contrato.nominacionVolumen.volumenNominado" [ngModelOptions]="{standalone: true}">
+                          <div class="input-group-append">
+                              <span class="input-group-text">M3</span>
+                            </div>
+                      </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputVolumenEntregado">Volúmen entregado:</span>
+                        </div>
+                        <input  type="number" readonly="true" class="form-control" aria-describedby="inputVolumenEntregado"
+                                [(ngModel)]="contrato.nominacionVolumen.volumenEntregado" [ngModelOptions]="{standalone: true}">
+                        <div class="input-group-append">
+                            <span class="input-group-text">M3</span>
+                        </div>
+                    </div>                    
+                </div>
+              </div>
+  
+              <p class="font-weight-bold">Certificación Presupuestaria:</p>
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="inputGroupSelectProceso">Proceso de Contratación:</label>
+                    </div>
+                    <select class="custom-select" id="inputGroupSelectProceso" [(ngModel)]="contrato.certificacionPresupuestaria.idProcesoContratacion" [ngModelOptions]="{standalone: true}">
+                      <option value=0>Seleccionar...</option>
+                      <option value=10>Proceso de Contratación de x</option>
+                      <option value=20>Proceso de Contratación de y</option>
+                      <option value=30>Proceso de Contratación de z</option>                    
+                      <!-- <option *ngFor="let op of productos" [value]="op.codigo">{{op.valor}}</option> -->
+                    </select>
+                  </div>                
+                </div>
+                <div class="col-md-4">
+                  <div class="input-group input-group-sm mb-3">
+                         <div class="input-group input-group-sm mb-3">
+                          <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelectCertificacion">Número de Certificación:</label>
+                          </div>
+                          <select class="custom-select" id="inputGroupSelectCertificacion" [(ngModel)]="contrato.certificacionPresupuestaria.numero" [ngModelOptions]="{standalone: true}">
+                            <option value=0>Seleccionar...</option>
+                            <option value=1>777 888 999</option>
+                            <option value=2>777 111 888</option>
+                            <option value=3>777 333 444</option>
+                            <!-- <option *ngFor="let op of productos" [value]="op.codigo">{{op.valor}}</option> -->
+                          </select>
+                        </div>
+                  </div>
+                </div>             
+              </div>
+  
+              <p class="font-weight-bold">Empresa de Suministro (Proveedor):</p>
+              <div class="row">
+                <div class="col-md">
+                  <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="inputGroupSelectSectorEmpresa">Nombre de las Empresa:</label>
+                    </div>
+                    <select class="custom-select" id="inputGroupSelectSectorEmpresa"
+                            [(ngModel)]="contrato.empresa.id" [ngModelOptions]="{standalone: true}">
+                      <option value=0>Seleccionar...</option>
+                      <option *ngFor="let op of empresas" [value]="op.id">{{op.descripcion}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+               
+            
+          </div>
+  
+          <div class="card-footer">
+            <div class="row justify-content-end">
+              <div class="col-md-1">
+                <input class="btn btn-outline-primary btn-sm" type="submit" value="Guardar">
+              </div>
+            </div>
+          </div>
+  
+        </div>
+    </form>
+  </div>
+
+  {{empresas|json}}

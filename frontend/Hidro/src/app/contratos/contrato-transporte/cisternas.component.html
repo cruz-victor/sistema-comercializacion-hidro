@@ -1,0 +1,156 @@
+<!-- <p>cisternas works!</p> -->
+
+<div class="container">
+
+    <h3>Cisternas de Empresa o Asociación</h3>
+    <hr>  
+
+    <form (ngSubmit)="submit()">
+        <div class="card">
+            <!-- <h5 class="card-title mt-3 text-center">Información de Cisternas de Empresa o Asociación</h5> -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-11">
+                  <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="inputGroupSelectSectorEmpresa">Empresa o Asociación:</label>
+                    </div>
+                    <select class="custom-select" id="inputGroupSelectSectorEmpresa" #t (change)="onChange(); onChangeEmpresa(t.value)"
+                            [(ngModel)]="idEmpresaAsociacion" [ngModelOptions]="{standalone: true}">
+                      <option selected="selected" value=0>Seleccionar...</option>
+                      <option *ngFor="let op of empresasAsociaciones" [value]="op.id">{{op.descripcion}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-1">
+                  <span class="badge badge-pill badge-light">{{actualTipoEmpresa}}</span>
+                </div>
+              </div>
+
+              <div class="row">
+                <table class="table table-striped table-bordered">    
+                  <colgroup>
+                    <col span="1" style="width: 5%;">
+                    <col span="1" style="width: 95%;">
+                 </colgroup>
+                  <thead>    
+                    <tr>    
+                      <th></th>    
+                      <th class="text-muted">Cisternas</th>    
+                  </tr>    
+                  </thead>    
+                  <tbody>    
+                    <tr *ngFor="let itemTramo of camiones; let i = index;">    
+                      <td>    
+                        <!-- <button type="button" class="btn btn-outline-primary btn-sm" (click)="deleteRow(i)"> x </button> -->
+                        <a class="badge badge-secondary" (click)="deleteRow(i)">Eliminar</a>
+                      </td>   
+                      <td>    
+                        <div class="row">
+                          <div class="col-md-4">
+                              <div class="input-group input-group-sm mb-3">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputPlaca">Placa (<span class="text-danger font-weight-bold">*</span>):</span>
+                                  </div>
+                                  <input type="text" class="form-control" aria-describedby="inputPlaca" [(ngModel)]="camiones[i].placa" [ngModelOptions]="{standalone: true}">
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="input-group input-group-sm mb-3">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputMarca">Marca:</span>
+                                  </div>
+                                  <input type="text" class="form-control" aria-describedby="inputMarca" [(ngModel)]="camiones[i].marca" [ngModelOptions]="{standalone: true}">
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="input-group input-group-sm mb-3">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputAnio">Año:</span>
+                                  </div>
+                                  <input type="number" class="form-control" aria-describedby="inputAnio" [(ngModel)]="camiones[i].anio" [ngModelOptions]="{standalone: true}">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row"> 
+                          <div class="col-md-4">
+                              <div class="input-group input-group-sm mb-3">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputColor">Color:</span>
+                                  </div>
+                                  <input type="text" class="form-control" aria-describedby="inputColor" [(ngModel)]="camiones[i].color" [ngModelOptions]="{standalone: true}">
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="input-group input-group-sm mb-3">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputCapacidad">Capacidad en Litros (<span class="text-danger font-weight-bold">*</span>):</span>
+                                  </div>
+                                  <input type="number" class="form-control" aria-describedby="inputCapacidad" [(ngModel)]="camiones[i].capacidad" [ngModelOptions]="{standalone: true}">
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="input-group input-group-sm mb-3">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputNroCompartimientos">Número de Compartimentos:</span>
+                                  </div>
+                                  <input type="number" class="form-control" aria-describedby="inputNroCompartimientos" [(ngModel)]="camiones[i].nroCompartimientos" [ngModelOptions]="{standalone: true}">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-4">
+                              <div class="input-group input-group-sm mb-3">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputNroChasis">Número de Chasis:</span>
+                                  </div>
+                                  <input type="text" class="form-control" aria-describedby="inputNroChasis" [(ngModel)]="camiones[i].nroChasis" [ngModelOptions]="{standalone: true}">
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="input-group input-group-sm mb-3">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputDisposicionEjes">Disposicion de Ejes:</span>
+                                  </div>
+                                  <input type="text" class="form-control" aria-describedby="inputDisposicionEjes" [(ngModel)]="camiones[i].disposicionEjes" [ngModelOptions]="{standalone: true}">
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="input-group input-group-sm mb-3">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputEstado">Estado General del Vehiculo:</span>
+                                  </div>
+                                  <input type="text" class="form-control" aria-describedby="inputEstado" [(ngModel)]="camiones[i].estado" [ngModelOptions]="{standalone: true}">
+                              </div>
+                          </div>
+                      </div>                 
+                      </td>       
+                    </tr>   
+                  </tbody>   
+                  <tfoot>
+                      <!-- <button type="button" class="btn btn-outline-success" (click)="addRow()"> + </button> -->
+                      <tr>
+                        <td colspan="4" class="text-left">
+                          <a class="badge badge-success" (click)="addRow()">Adicionar Cisterna</a>
+                        </td>
+                      </tr>
+                  </tfoot> 
+                </table> 
+              </div>
+            </div>        
+
+
+            <div class="card-footer">
+              <div class="row justify-content-end">
+                <div class="col-md-1">
+                  <input class="btn btn-outline-primary btn-sm" type="submit" value="Guardar">
+                </div>
+            </div>              
+            </div>
+        </div>
+      </form>
+
+</div>
+
+
+

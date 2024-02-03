@@ -1,0 +1,111 @@
+<div class="container">
+
+    <h3>Empresa de Suministro (Buques)</h3>
+    <hr>
+  
+    <!-- <form (ngSubmit)="submit()">
+        <div class="card">
+
+            <div class="card-body">
+
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="inputGroupSelectAsociaciones">Empresas existentes:</label>
+                    </div>
+                    <select class="custom-select" id="inputGroupSelectAsociaciones" #t (change)="onChangeEmpresa(t.value)"
+                            [(ngModel)]="empresaSeleccionada" [ngModelOptions]="{standalone: true}">
+                      <option value=0>(Nueva Empresa)</option>
+                      <option *ngFor="let op of empresas" [value]="op.id">{{op.razonSocial}}</option>
+                    </select>
+                  </div>                  
+              </div>
+              
+              </div>
+              <hr>
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="inputRazonSocial">Nombre de la empresa:</span>
+                            </div>
+                            <input type="text" class="form-control" aria-describedby="inputRazonSocial" 
+                                  [(ngModel)]="empresa.razonSocial" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="inputNit">NIT o similar:</span>
+                            </div>
+                            <input type="text" class="form-control" aria-describedby="inputNit" 
+                                  [(ngModel)]="empresa.numeroDocumento" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="inputDireccion">Dirección:</span>
+                            </div>
+                            <input type="text" class="form-control" aria-describedby="inputDireccion" 
+                                  [(ngModel)]="empresa.direccion" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="inputemail">Email(s):</span>
+                            </div>
+                            <input type="email" class="form-control" aria-describedby="inputemail" 
+                                  [(ngModel)]="empresa.email" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="inputSitioWeb">Sitio Web:</span>
+                            </div>
+                            <input type="text" class="form-control" aria-describedby="inputSitioWeb" 
+                                  [(ngModel)]="empresa.sitioWeb" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="inputTelefono">Teléfono(s):</span>
+                            </div>
+                            <input type="email" class="form-control" aria-describedby="inputTelefono" 
+                                  [(ngModel)]="empresa.telefono" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>  
+        
+            <div class="card-footer">
+              <div class="row justify-content-end">
+                <div class="col-md-1">
+                  <input class="btn btn-outline-secondary btn-sm" type="reset" value="Limpiar" *ngIf="isNew">
+                </div>
+                <div class="col-md-1">
+                  <input class="btn btn-outline-primary btn-sm" type="submit" value="Guardar">
+                </div>
+            </div>
+            </div>
+        </div>
+      </form> -->
+
+</div>
+<!-- 
+<br>
+<p>{{empresas | json}}</p>   
+<br> -->
+<!-- <p>{{asociaciones | json}}</p>    -->
+

@@ -1,0 +1,333 @@
+<div class="row">
+  <div class="col-md">
+    <h3>Información Contractual</h3>
+  </div>
+  <div class="col-md-2 text-right">
+    <div class="input-group input-group-sm mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="inputGroupSelectSectorSector">Gestión:</label>
+      </div>
+      <select class="custom-select" id="inputGroupSelectSectorSector" [(ngModel)]="gestionActual" [ngModelOptions]="{standalone: true}">
+        <option *ngFor="let param of parametricaGestiones" [value]="param.codigo">{{param.valor}}</option>
+      </select>
+    </div> 
+  </div>
+</div>
+<hr>
+<div class="row fluid">
+  <div class="col-6">
+    <section class="fieldset mt-3">
+      <h1>Transporte Internacional (Cisternas)</h1>
+      <div class="row">
+        <div class="col-4">
+          <div class="card card-flyer mt-3">
+            <div class="card-body">
+              <h4 class="card-title">
+                <div class="row">
+                  <div class="col-8">
+                    TOTAL<br><span class="badge badge-dark">{{totalesInternacionales.TotalGeneral.cantidadContratos}}</span>               
+                  </div>
+                  <div class="col-4">
+                    <div class="stat text-primary mx-auto text-right">
+                      <i  data-feather="truck"></i> 
+                    </div>                 
+                  </div>
+                </div>
+              </h4>
+              <div class="mb-2">
+                <span class="text-muted">Adjudicado:</span>
+                <span class="text-primary"><i class="mdi mdi-arrow-bottom-right"></i> {{totalesInternacionales.TotalGeneral.monto.montoAdjudicado | number: '1.0-2'}} </span>       
+                <!-- <ngb-progressbar [showValue]="true" type="success" [value]="23.1"></ngb-progressbar>            -->
+              </div>
+              <div class="mb-0">
+                <span class="text-muted">Ejecutado:</span>
+                <span class="text-primary"><i class="mdi mdi-arrow-bottom-right"></i> {{totalesInternacionales.TotalGeneral.monto.ejecutado | number: '1.0-0'}} </span>                  
+              </div>
+              <hr>
+              <div class="mb-0">
+                <span class="text-muted">Saldo:</span>
+                <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i> {{totalesInternacionales.TotalGeneral.monto.saldo | number: '1.0-0'}} </span>                  
+              </div>
+            </div>
+          </div>  
+        </div>
+        <div class="col-4">
+          <div class="card card-flyer mt-3">
+            <div class="card-body">
+              <h4 class="card-title">
+                <div class="row">
+                  <div class="col-8">
+                    Occidente<br><span class="badge badge-primary">{{totalesInternacionales.Occidente.cantidadContratos}}</span>              
+                  </div>
+                  <div class="col-4">
+                    <div class="stat text-primary mx-auto text-right">
+                      <i  data-feather="truck"></i> 
+                    </div>                 
+                  </div>
+                </div>
+              </h4>               
+              <div class="mb-2">
+                <span class="text-muted">Adjudicado:</span>
+                <span class="text-primary"><i class="mdi mdi-arrow-bottom-right"></i> {{totalesInternacionales.Occidente.monto.montoAdjudicado | number: '1.0-0'}} </span>       
+                <!-- <ngb-progressbar [showValue]="true" type="success" [value]="23.1"></ngb-progressbar>            -->
+              </div>
+              <div class="mb-0">
+                <span class="text-muted">Ejecutado:</span>
+                <span class="text-primary"><i class="mdi mdi-arrow-bottom-right"></i> {{totalesInternacionales.Occidente.monto.ejecutado | number: '1.0-0'}} </span>                  
+              </div>
+              <hr>
+              <div class="mb-0">
+                <span class="text-muted">Saldo:</span>
+                <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i> {{totalesInternacionales.Occidente.monto.saldo | number: '1.0-0'}} </span>                  
+              </div>
+            </div>
+          </div>     
+        </div>
+        <div class="col-4">
+          <div class="card card-flyer mt-3">
+            <div class="card-body">
+              <h4 class="card-title">
+                <div class="row">
+                  <div class="col-8">
+                    Sur-SurOriente<br><span class="badge badge-primary">{{totalesInternacionales.SurOriente.cantidadContratos}}</span>              
+                  </div>
+                  <div class="col-4">
+                    <div class="stat text-primary mx-auto text-right">
+                      <i  data-feather="truck"></i> 
+                    </div>                 
+                  </div>
+                </div>
+              </h4>                 
+              <div class="mb-2">
+                <span class="text-muted">Adjudicado:</span>
+                <span class="text-primary"><i class="mdi mdi-arrow-bottom-right"></i> {{totalesInternacionales.SurOriente.monto.montoAdjudicado | number: '1.0-0'}} </span>       
+                <!-- <ngb-progressbar [showValue]="true" type="success" [value]="23.1"></ngb-progressbar>            -->
+              </div>
+              <div class="mb-0">
+                <span class="text-muted">Ejecutado:</span>
+                <span class="text-primary"><i class="mdi mdi-arrow-bottom-right"></i> {{totalesInternacionales.SurOriente.monto.ejecutado | number: '1.0-0'}} </span>                  
+              </div>
+              <hr>
+              <div class="mb-0">
+                <span class="text-muted">Saldo:</span>
+                <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i> {{totalesInternacionales.SurOriente.monto.saldo | number: '1.0-0'}} </span>                  
+              </div>
+            </div>
+          </div>       
+        </div>
+      </div>
+    </section>    
+  </div>
+  <div class="col-6">
+    <!-- <p class="text-left">Transporte Nacional (Cisternas)</p> -->
+    <section class="fieldset mt-3">
+      <h1>Transporte Nacional (Cisternas)</h1>
+      <div class="row">
+        <div class="col-4">
+          <div class="card card-flyer mt-3">
+            <div class="card-body">
+              <h4 class="card-title">
+                <div class="row">
+                  <div class="col-8">
+                    TOTAL<br><span class="badge badge-dark">{{totalesNacionales.TotalGeneral.cantidadContratos}}</span>              
+                  </div>
+                  <div class="col-4">
+                    <div class="stat text-primary mx-auto text-right">
+                      <i  data-feather="truck"></i> 
+                    </div>                 
+                  </div>
+                </div>
+              </h4>
+              <div class="mb-2">
+                <span class="text-muted">Adjudicado:</span>
+                <span class="text-primary"><i class="mdi mdi-arrow-bottom-right"></i> {{totalesNacionales.TotalGeneral.monto.montoAdjudicado | number: '1.0-0'}} </span>       
+                <!-- <ngb-progressbar [showValue]="true" type="success" [value]="23.1"></ngb-progressbar>            -->
+              </div>
+              <div class="mb-0">
+                <span class="text-muted">Ejecutado:</span>
+                <span class="text-primary"><i class="mdi mdi-arrow-bottom-right"></i> {{totalesNacionales.TotalGeneral.monto.ejecutado | number: '1.0-0'}} </span>                  
+              </div>
+              <hr>
+              <div class="mb-0">
+                <span class="text-muted">Saldo:</span>
+                <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i> {{totalesNacionales.TotalGeneral.monto.saldo | number: '1.0-0'}} </span>                  
+              </div>
+            </div>
+          </div>   
+        </div>
+        <div class="col-4">
+          <div class="card card-flyer mt-3">
+            <div class="card-body">
+              <h4 class="card-title">
+                <div class="row">
+                  <div class="col-8">
+                    Occidente<br><span class="badge badge-primary">{{totalesNacionales.Occidente.cantidadContratos}}</span>              
+                  </div>
+                  <div class="col-4">
+                    <div class="stat text-primary mx-auto text-right">
+                      <i  data-feather="truck"></i> 
+                    </div>                 
+                  </div>
+                </div>
+              </h4>               
+              <div class="mb-2">
+                <span class="text-muted">Adjudicado:</span>
+                <span class="text-primary"><i class="mdi mdi-arrow-bottom-right"></i> {{totalesNacionales.Occidente.monto.montoAdjudicado | number: '1.0-0'}} </span>       
+                <!-- <ngb-progressbar [showValue]="true" type="success" [value]="23.1"></ngb-progressbar>            -->
+              </div>
+              <div class="mb-0">
+                <span class="text-muted">Ejecutado:</span>
+                <span class="text-primary"><i class="mdi mdi-arrow-bottom-right"></i> {{totalesNacionales.Occidente.monto.ejecutado | number: '1.0-0'}} </span>                  
+              </div>
+              <hr>
+              <div class="mb-0">
+                <span class="text-muted">Saldo:</span>
+                <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i> {{totalesNacionales.Occidente.monto.saldo | number: '1.0-0'}} </span>                  
+              </div>
+            </div>
+          </div>            
+        </div>
+        <div class="col-4">
+          <div class="card card-flyer mt-3">
+            <div class="card-body">
+              <h4 class="card-title">
+                <div class="row">
+                  <div class="col-8">
+                    Sur-SurOriente<br><span class="badge badge-primary">{{totalesNacionales.SurOriente.cantidadContratos}}</span>              
+                  </div>
+                  <div class="col-4">
+                    <div class="stat text-primary mx-auto text-right">
+                      <i  data-feather="truck"></i> 
+                    </div>                 
+                  </div>
+                </div>
+              </h4>                 
+              <div class="mb-2">
+                <span class="text-muted">Adjudicado:</span>
+                <span class="text-primary"><i class="mdi mdi-arrow-bottom-right"></i> {{totalesNacionales.SurOriente.monto.montoAdjudicado | number: '1.0-0'}} </span>       
+                <!-- <ngb-progressbar [showValue]="true" type="success" [value]="23.1"></ngb-progressbar>            -->
+              </div>
+              <div class="mb-0">
+                <span class="text-muted">Ejecutado:</span>
+                <span class="text-primary"><i class="mdi mdi-arrow-bottom-right"></i> {{totalesNacionales.SurOriente.monto.ejecutado | number: '1.0-0'}} </span>                  
+              </div>
+              <hr>
+              <div class="mb-0">
+                <span class="text-muted">Saldo:</span>
+                <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i> {{totalesNacionales.SurOriente.monto.saldo | number: '1.0-0'}} </span>                  
+              </div>
+            </div>
+          </div>            
+        </div>
+      </div>
+    </section> 
+  </div>
+</div>
+
+<div class="row fluid mt-3">
+  <div class="col-6">
+    <section class="fieldset">
+      <h1>Suministro Internacional</h1>
+      <div class="row">
+        <div class="col-4">
+          <div class="card card-flyer mt-3">
+          <div class="card-body">
+            <h4 class="card-title">
+              <div class="row">
+                <div class="col-8">
+                  TOTAL<br><span class="badge badge-dark">{{totalesSuministros.TotalGeneral.cantidadContratos}}</span>            
+                </div>
+                <div class="col-4">
+                  <div class="stat text-primary mx-auto text-right">
+                    <i  data-feather="wind"></i> 
+                  </div>                 
+                </div>
+              </div>
+            </h4>         
+            <div class="mb-2">
+              <span class="text-muted">Adjudicado:</span>
+              <span class="text-primary"><i class="mdi mdi-arrow-bottom-right"></i> {{totalesSuministros.TotalGeneral.monto.montoAdjudicado | number: '1.0-0'}} </span>       
+              <!-- <ngb-progressbar [showValue]="true" type="success" [value]="23.1"></ngb-progressbar>            -->
+            </div>
+            <div class="mb-0">
+              <span class="text-muted">Ejecutado:</span>
+              <span class="text-primary"><i class="mdi mdi-arrow-bottom-right"></i> {{totalesSuministros.TotalGeneral.monto.ejecutado | number: '1.0-0'}} </span>                  
+            </div>
+            <hr>
+            <div class="mb-0">
+              <span class="text-muted">Saldo:</span>
+              <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i> {{totalesSuministros.TotalGeneral.monto.saldo | number: '1.0-0'}} </span>                  
+            </div>
+          </div>      
+        </div>    
+        </div>
+        <div class="col-4">
+          <div class="card card-flyer mt-3">
+            <div class="card-body">
+              <h4 class="card-title">
+                <div class="row">
+                  <div class="col-8">
+                    Occidente<br><span class="badge badge-primary">{{totalesSuministros.Occidente.cantidadContratos}}</span>             
+                  </div>
+                  <div class="col-4">
+                    <div class="stat text-primary mx-auto text-right">
+                      <i  data-feather="corner-left-down"></i> 
+                    </div>                 
+                  </div>
+                </div>
+              </h4>                       
+              <div class="mb-2">
+                <span class="text-muted">Adjudicado:</span>
+                <span class="text-primary"><i class="mdi mdi-arrow-bottom-right"></i> {{totalesSuministros.Occidente.monto.montoAdjudicado | number: '1.0-0'}} </span>       
+                <!-- <ngb-progressbar [showValue]="true" type="success" [value]="23.1"></ngb-progressbar>            -->
+              </div>
+              <div class="mb-0">
+                <span class="text-muted">Ejecutado:</span>
+                <span class="text-primary"><i class="mdi mdi-arrow-bottom-right"></i> {{totalesSuministros.Occidente.monto.ejecutado | number: '1.0-0'}} </span>                  
+              </div>
+              <hr>
+              <div class="mb-0">
+                <span class="text-muted">Saldo:</span>
+                <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i> {{totalesSuministros.Occidente.monto.saldo | number: '1.0-0'}} </span>                  
+              </div>
+            </div>
+          </div>           
+        </div>
+        <div class="col-4">
+          <div class="card card-flyer mt-3">
+            <div class="card-body">
+              <h4 class="card-title">
+                <div class="row">
+                  <div class="col-8">
+                    Sur-SurOriente<br><span class="badge badge-primary">{{totalesSuministros.SurOriente.cantidadContratos}}</span>             
+                  </div>
+                  <div class="col-4">
+                    <div class="stat text-primary mx-auto text-right">
+                      <i  data-feather="corner-right-down"></i> 
+                    </div>                 
+                  </div>
+                </div>
+              </h4>              
+              <div class="mb-2">
+                <span class="text-muted">Adjudicado:</span>
+                <span class="text-primary"><i class="mdi mdi-arrow-bottom-right"></i> {{totalesSuministros.SurOriente.monto.montoAdjudicado | number: '1.0-0'}} </span>       
+                <!-- <ngb-progressbar [showValue]="true" type="success" [value]="23.1"></ngb-progressbar>            -->
+              </div>
+              <div class="mb-0">
+                <span class="text-muted">Ejecutado:</span>
+                <span class="text-primary"><i class="mdi mdi-arrow-bottom-right"></i> {{totalesSuministros.SurOriente.monto.ejecutado | number: '1.0-0'}} </span>                  
+              </div>
+              <hr>
+              <div class="mb-0">
+                <span class="text-muted">Saldo:</span>
+                <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i> {{totalesSuministros.SurOriente.monto.saldo | number: '1.0-0'}} </span>                  
+              </div>
+            </div>
+          </div>          
+        </div>
+
+      </div>
+    </section>
+  </div>
+  
+</div>

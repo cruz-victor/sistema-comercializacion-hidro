@@ -1,0 +1,448 @@
+<div class="container">
+<h3>Información del Contrato de Transporte Internacional</h3>
+<hr>
+
+<form (ngSubmit)="submit()">
+
+  <!-- Cabecera de totales -->
+  <div class="row">
+    <div class="col-md-7">
+      <div class="card bg-light mb-1">
+        <div class="card-header">
+          Volúmenes Totales
+        </div>
+        <div class="card-body">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Adjudicado</th>
+                <th>Cargado</th>
+                <th>Descargado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let total of data.totalVolumenesMonto.volumen; let i = index">
+                <td>{{total.producto}}</td>
+                <td>{{total.volumenNominado | m3}}</td>
+                <td>{{total.volumenCargado | m3}}</td>
+                <td>{{total.volumenDescargado | m3}}</td>
+              </tr> 
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="card bg-light mb-1">
+        <div class="card-header">
+          Monto Total
+        </div>
+        <div class="card-body">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>Adjudicado</th>
+                <th>Ejecutado</th>
+                <th>Saldo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{data.totalVolumenesMonto.monto.montoAdjudicado | number: '1.0-0'}}</td>
+                <td>{{data.totalVolumenesMonto.monto.ejecutado | number: '1.0-0'}}</td>
+                <td>{{data.totalVolumenesMonto.monto.saldo | number: '1.0-0'}}</td>
+              </tr>           
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cuerpo real del contrato-->
+    <div class="card">
+        <div class="card-body">
+            <p class="font-weight-bold">Identificación del Contrato:</p>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputNumeroContrato">Número de contrato:</span>
+                        </div>
+                        <input  type="number" class="form-control" aria-describedby="inputNumeroContrato" 
+                                [ngClass]="{ 'is-invalid': submittedNumeroIdContrato }"
+                                [(ngModel)]="data.informacionGeneral.numeroContrato" [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+                <div class="col-md-7">
+                  <div class="input-group input-group-sm mb-3">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputIdTemporal">Identificador temporal:</span>
+                      </div>
+                      <input  type="text" class="form-control" aria-describedby="inputIdTemporal" 
+                              [ngClass]="{ 'is-invalid': submittedNumeroIdContrato }"
+                              [(ngModel)]="data.informacionGeneral.idTemporal" [ngModelOptions]="{standalone: true}">
+                  </div>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGestion">Gestión (<span class="text-danger font-weight-bold">*</span>):</span>
+                    </div>
+                    <input  type="number" class="form-control" aria-describedby="inputGestion" [ngClass]="{ 'is-invalid': submittedGestion }"
+                            [(ngModel)]="data.informacionGeneral.gestion" [ngModelOptions]="{standalone: true}">
+                </div>
+              </div>              
+              <div class="col-md-7">
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelectSectorSector">Sector (<span class="text-danger font-weight-bold">*</span>):</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelectSectorSector" [ngClass]="{ 'is-invalid': submittedSector }"
+                        [(ngModel)]="data.informacionEspecifica.sector" [ngModelOptions]="{standalone: true}">
+                  <option value=''>Seleccionar...</option>
+                  <option *ngFor="let op of sectores" [value]="op.codigo">{{op.valor}}</option>
+                </select>
+              </div>
+              </div>
+            </div>      
+            <div class="row">
+              <div class="col-md">
+                <div class="input-group input-group-sm mb-3">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputDescripcion">Descripción (<span class="text-danger font-weight-bold">*</span>):</span>
+                  </div>
+                  <textarea class="form-control" aria-describedby="inputDescripcion" rows="3" maxlength ="500" [ngClass]="{ 'is-invalid': submittedDescripcion }"
+                            [(ngModel)]="data.informacionEspecifica.descripcionContrato" [ngModelOptions]="{standalone: true}"></textarea>
+              </div>                
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputFechaSuscripcion">Fecha de Suscripción (<span class="text-danger font-weight-bold">*</span>):</span>
+                        </div>
+                        <input class="form-control" placeholder="dd/mm/aaaa" name="dp" ngbDatepicker #d="ngbDatepicker" readonly="true"
+                              [ngClass]="{ 'is-invalid': submittedFechaSuscripcion }"
+                              [(ngModel)]="fechaSuscripcion" [ngModelOptions]="{standalone: true}" (ngModelChange)="buildDateSuscripcion($event)">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputFechaFinal">Fecha de Finalización (<span class="text-danger font-weight-bold">*</span>):</span>
+                        </div>
+                        <input class="form-control" placeholder="dd/mm/aaaa" name="dp" ngbDatepicker #d2="ngbDatepicker" readonly="true"
+                              [ngClass]="{ 'is-invalid': submittedFechaFinalizacion }"
+                              [(ngModel)]="fechaFinalizacion" [ngModelOptions]="{standalone: true}" (ngModelChange)="buildDateFinalizacion($event)">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"></button>
+                        </div>
+                    </div>           
+                </div>
+            </div>
+            <hr>
+            <p class="font-weight-bold">Monto:</p>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-group input-group-sm mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputMontoAdjudicado">Monto adjudicado (<span class="text-danger font-weight-bold">*</span>):</span>
+                  </div>
+                  <input  type="number" class="form-control" aria-describedby="inputMontoAdjudicado" [ngClass]="{ 'is-invalid': submittedMontoAdjudicado }"
+                          [(ngModel)]="data.monto.montoAdjudicado" [ngModelOptions]="{standalone: true}">
+                </div>
+              </div>
+            </div>
+
+            <hr>
+            <p class="font-weight-bold">Productos:</p>
+            <table class="table table-striped table-bordered table-hover">    
+            <thead>    
+              <tr>    
+                <th></th>    
+                <th>Producto</th>    
+                <th>% Adjudicado</th>    
+                <th>Vol. Adjudicado</th>   
+                <th>Merma Max. Permisible</th> 
+              </tr>    
+            </thead>    
+            <tbody>    
+              <tr *ngFor="let prod of data.informacionEspecifica.productos; let i = index;">    
+                <td>    
+                    <a class="badge badge-secondary" (click)="deleteRowProductos(i)">Eliminar</a>
+                </td>   
+                <td>    
+                    <select class="custom-select btn-sm" [(ngModel)]="data.informacionEspecifica.productos[i].producto" [ngModelOptions]="{standalone: true}">
+                    <option value=''>Seleccionar...</option>
+                    <option *ngFor="let param of parametricaProductos" [value]="param.id">{{param.descripcion}}</option>
+                    </select>
+                </td>    
+                <td>    
+                  <div class="input-group input-group-sm">
+                    <input  type="number" class="form-control" aria-describedby="inputPorcentajeAdjudicado" min="0" max="100"
+                            [(ngModel)]="data.informacionEspecifica.productos[i].porcentajeAdjudicado" [ngModelOptions]="{standalone: true}">
+                    <div class="input-group-append">
+                        <span class="input-group-text">%</span>
+                      </div>
+                  </div>                 
+                </td>    
+                <td>    
+                  <div class="input-group input-group-sm">
+                    <input  type="number" class="form-control" aria-describedby="inputVolumenAdjudicado" min="0"
+                            [(ngModel)]="data.informacionEspecifica.productos[i].volumenAdjudicado" [ngModelOptions]="{standalone: true}">
+                    <div class="input-group-append">
+                        <span class="input-group-text">M3</span>
+                      </div>
+                  </div>    
+                </td>     
+                <td>    
+                  <div class="input-group input-group-sm">
+                    <input  type="number" class="form-control" aria-describedby="inputMerma" min="0" max="100"
+                            [(ngModel)]="data.informacionEspecifica.productos[i].mermaPermitida" [ngModelOptions]="{standalone: true}">
+                    <div class="input-group-append">
+                        <span class="input-group-text">%</span>
+                      </div>
+                  </div>  
+                </td> 
+                </tr>   
+                <tr>
+                <td colspan="7" class="text-left">
+                    <a class="badge badge-success" (click)="addRowProductos()">Adicionar Producto</a>
+                </td>
+              </tr>
+            </tbody>   
+            </table> 
+
+            <p class="font-weight-bold">Certificaciones Presupuestarias:</p>
+            <table class="table table-striped table-bordered table-hover">
+              <colgroup>
+                <col span="1" style="width: 5%;">
+                <col span="1" style="width: 95%;">
+             </colgroup>
+            <thead>    
+              <tr>    
+                <th></th>    
+                <th>Certificacion Presupuestaria</th>    
+              </tr>    
+            </thead>    
+            <tbody>    
+              <tr *ngFor="let prod of data.certificacionesPresupuestarias; let i = index;">    
+                <td>    
+                    <a class="badge badge-secondary" (click)="deleteRowCertificacion(i)">Eliminar</a>
+                </td>   
+                <td>    
+                  <select class="custom-select btn-sm" id="inputGroupSelectCertificacion" [(ngModel)]="data.certificacionesPresupuestarias[i].numero" [ngModelOptions]="{standalone: true}">
+                    <option value=0>Seleccionar...</option>
+                    <option *ngFor="let op of parametricaAllCertificaciones" [value]="op.id">{{op.descripcion}}</option>
+                  </select>
+                </td>    
+                </tr>   
+                <tr>
+                <td colspan="2" class="text-left">
+                    <a class="badge badge-success" (click)="addRowCertificacion()">Adicionar Certificación Presupuestaria</a>
+                </td>
+              </tr>
+            </tbody>   
+            </table> 
+
+            <p class="font-weight-bold">Empresa o Asociación:</p>
+            <div class="row">
+              <div class="col-md-11">
+                <div class="input-group input-group-sm mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelectEmpresa">Empresa o Asociación (<span class="text-danger font-weight-bold">*</span>):</label>
+                  </div>
+                  <select class="custom-select" id="inputGroupSelectEmpresa" #t (change)="onChangeEmpresa(t.value)"
+                          [ngClass]="{ 'is-invalid': submittedEmpresaAdjudicada }"
+                          [(ngModel)]="data.empresa.id" [ngModelOptions]="{standalone: true}">
+                    <option value=0>Seleccionar...</option>
+                    <option *ngFor="let op of empresasAsociaciones" [value]="op.id">{{op.descripcion}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-1"><span class="badge badge-pill badge-light">{{actualTipoEmpresa}}</span></div>
+            </div>
+
+            <p class="font-weight-bold">Gestión de Lotes:</p>
+            <div class="row" *ngIf="isNew">
+              <div class="col-md-2">
+                Lote(s) (<span class="text-danger font-weight-bold">*</span>):
+              </div>
+              <div class="col-md-2" *ngFor="let item of lotesTransInter">
+                <div class="input-group input-group-sm mb-3">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <input type="checkbox" aria-label="Checkbox" value="{{item.id}}" #k (change)="onChangeLote(k.value)"
+                             [checked]="item.checked">
+                    </div>
+                  </div>
+                  <input type="text" class="form-control" aria-label="Text" value="{{item.lote}}" readonly="true">
+                </div>                
+              </div>
+            </div>
+
+              <ngb-accordion #acc="ngbAccordion">
+                <ngb-panel *ngFor="let lote of arrayLotecillos; let i = index;" id="toggle-{{i}}" 
+                            title="Información del Lote {{arrayLotecillos[i].lote}}">
+                  <ng-template ngbPanelContent >
+ 
+                    <div class="row">
+                      <h6>Tramos Principales:</h6>
+
+                    </div>            
+                    <div class="row">
+            
+                      <table class="table table-striped table-bordered">    
+                        <colgroup>
+                          <col span="1" style="width: 35%;">
+                          <col span="1" style="width: 25%;">
+                          <col span="1" style="width: 25%;">
+                          <col span="1" style="width: 15%;">
+                       </colgroup>                        
+                        <thead>    
+                          <tr>    
+                            <th>Punto de Recepción</th>    
+                            <th>Frontera</th>    
+                            <th>Punto de Entrega</th>    
+                            <th>Tarifa</th>
+                        </tr>    
+                        </thead>    
+                        <tbody>    
+                          <tr *ngFor="let itemTramo of arrayLotecillos[i].tramos.principales; let j = index;">    
+                            <td>    
+                              <div class="input-group input-group-sm">
+                                <input type="text" class="form-control" readonly="true"
+                                       [(ngModel)]="arrayLotecillos[i].tramos.principales[j].puntoRecepcion" [ngModelOptions]="{standalone: true}">
+                              </div>                               
+                            </td>    
+                            <td>    
+                              <div class="input-group input-group-sm">
+                                <input type="text" class="form-control" readonly="true"
+                                       [(ngModel)]="arrayLotecillos[i].tramos.principales[j].frontera" [ngModelOptions]="{standalone: true}">
+                              </div>                                           
+                            </td>    
+                            <td>    
+                              <div class="input-group input-group-sm">
+                                <input type="text" class="form-control" readonly="true"
+                                       [(ngModel)]="arrayLotecillos[i].tramos.principales[j].puntoEntrega" [ngModelOptions]="{standalone: true}">
+                              </div>                                        
+                            </td>     
+                            <td>    
+                              <div class="input-group input-group-sm">
+                                <input  type="number" class="form-control input-group-sm" readonly="true"
+                                        [(ngModel)]="arrayLotecillos[i].tramos.principales[j].tarifa" [ngModelOptions]="{standalone: true}">             
+                        </div>                               
+                            </td>                              
+                          </tr>   
+                        </tbody>   
+                      </table> 
+                    </div>
+
+                    <div class="row">
+                      <h6>Tramos Secundarios:</h6>
+                    </div>
+                    <div class="row">
+                    <table class="table table-striped table-bordered">    
+                      <colgroup>
+                        <col span="1" style="width: 35%;">
+                        <col span="1" style="width: 25%;">
+                        <col span="1" style="width: 25%;">
+                        <col span="1" style="width: 15%;">
+                     </colgroup>                      
+                      <thead>    
+                        <tr>    
+                          <th>Punto de Recepción</th>    
+                          <th>Frontera</th>    
+                          <th>Punto de Entrega</th>
+                          <th>Tarifa</th>    
+                      </tr>    
+                      </thead>    
+                      <tbody>    
+                        <tr *ngFor="let itemTramo of arrayLotecillos[i].tramos.secundarios; let k = index;">    
+                          <td>    
+                            <div class="input-group input-group-sm">
+                              <input type="text" class="form-control" readonly="true"
+                                     [(ngModel)]="arrayLotecillos[i].tramos.secundarios[k].puntoRecepcion" [ngModelOptions]="{standalone: true}">
+                            </div>                             
+                          </td>    
+                          <td>    
+                            <div class="input-group input-group-sm">
+                              <input type="text" class="form-control" readonly="true"
+                                     [(ngModel)]="arrayLotecillos[i].tramos.secundarios[k].frontera" [ngModelOptions]="{standalone: true}">
+                            </div>                                      
+                          </td>    
+                          <td>    
+                            <div class="input-group input-group-sm">
+                              <input type="text" class="form-control" readonly="true"
+                                     [(ngModel)]="arrayLotecillos[i].tramos.secundarios[k].puntoEntrega" [ngModelOptions]="{standalone: true}">
+                            </div>              
+                          </td>
+                          <td>    
+                            <div class="input-group input-group-sm">
+                              <input  type="number" class="form-control"  readonly="true"
+                                      [(ngModel)]="arrayLotecillos[i].tramos.secundarios[k].tarifa" [ngModelOptions]="{standalone: true}">             
+                      </div>                              
+                          </td>                                           
+                        </tr>     
+                      </tbody>   
+                    </table> 
+                  </div>                    
+
+               
+                  </ng-template>
+                </ngb-panel>
+              </ngb-accordion>
+            
+              
+              <div *ngIf="!isNew">
+                <!-- <div> -->
+                <hr>
+                <app-adenda-transporte [parametrosLote]=arrayParametrosLotecillos 
+                                       [tramosLotecillosAdenda]=arrayLotecillosAdenda 
+                                       [adendas]=data.adendas></app-adenda-transporte>
+              </div>
+
+              <div *ngIf="!isNew">
+                <hr>
+                <div class="row">
+                  <div class="col-md">
+                    <div class="input-group input-group-sm mb-3">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputJustificacion">Justificación de cambio (<span class="text-danger font-weight-bold">*</span>):</span>
+                      </div>
+                      <textarea class="form-control" aria-describedby="inputJustificacion" rows="2" maxlength ="200"
+                                [ngClass]="{ 'is-invalid': submittedJustificacion }"
+                                [(ngModel)]="justificacionCambio" [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>                
+                  </div>                  
+                </div>
+              </div>
+          
+        </div>
+
+        <div class="card-footer">
+          <div class="row justify-content-end">
+            <div class="col-md-1">
+              <input class="btn btn-outline-primary btn-sm" type="submit" value="Guardar">
+            </div>
+          </div>
+        </div>
+
+      </div>
+  </form>
+</div>
+
+{{arrayLotecillos|json}}
+<hr>
+{{lotesContexto|json}}
+

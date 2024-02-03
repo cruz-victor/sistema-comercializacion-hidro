@@ -1,0 +1,87 @@
+<div class="container-fluid">
+  <div class="col-md">
+    <h3>Partidas Presupuestarias</h3>
+    <hr>
+  </div>
+  <form>
+    <div class="card">
+      <div class="card-body">
+        <div class="row mb-3">
+          <div class="col-md">
+            <div class="  -group form-inline">
+                Buscar: <input class="form-control ml-2" stype="text" name="searchTerm" [(ngModel)]="service.searchTerm"/>
+                <span class="ml-3" *ngIf="service.loading$ | async">
+                  cargando...
+                  <div class="spinner-border text-primary" role="status">
+                  </div>                  
+                </span>
+            </div>
+          </div>
+          <div class="col-md text-right">
+            <button type="button" class="btn btn-outline-dark" (click)="openitnew(content)">Nueva Partida</button>
+          </div>
+        </div>
+
+        <table class="table table-striped table-sm table-hover" >
+           
+          <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Número Partida</th>            
+            <!-- <th scope="col" sortable="numeroPartida" (sort)="onSort($event)">Número Partida</th> -->
+            <th scope="col" class="text-right">Monto Actual</th>
+            <th scope="col" class="text-right">Monto Aprobado</th>
+            <!-- <th scope="col" sortable="montoAprobado" (sort)="onSort($event)">Monto Aprobado.</th> -->
+            <th scope="col" class="text-right">Monto Incremento</th>
+            <th scope="col" class="text-right">Saldo</th>
+            <!-- <th scope="col">rutaDocumentoAdjunto</th> -->
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let parti of partidas$ | async" (click)="openit(content, parti.id)">
+            <td>{{parti.id}}</td>
+            <td><ngb-highlight [result]="parti.categoria" [term]="service.searchTerm"></ngb-highlight></td>
+            <td><ngb-highlight [result]="parti.numeroPartida" [term]="service.searchTerm"></ngb-highlight></td>
+            <td class="text-right"><ngb-highlight [result]="parti.montoActual | number: '1.2-2'" [term]="service.searchTerm"></ngb-highlight></td>
+            <td class="text-right"><ngb-highlight [result]="parti.montoAprobado | number: '1.2-2'" [term]="service.searchTerm"></ngb-highlight></td>
+            <td class="text-right"><ngb-highlight [result]="parti.montoIncremento | number: '1.2-2'" [term]="service.searchTerm"></ngb-highlight></td>
+            <td class="text-right"><ngb-highlight [result]="parti.saldo | number: '1.2-2'" [term]="service.searchTerm"></ngb-highlight></td>
+          </tr>
+       </tbody>
+        </table>          
+      
+        <div class="d-flex justify-content-between p-2">
+          <ngb-pagination
+            [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
+          </ngb-pagination>
+      
+          <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+            <option [ngValue]="7">7 ítems por página</option>
+            <option [ngValue]="12">12 ítems por página</option>
+            <option [ngValue]="18">18 ítems por página</option>
+          </select>
+
+        </div>            
+
+      </div>
+    </div>        
+  </form>    
+
+
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <app-partida idPartida={{idPartid}}></app-partida>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-link" (click)="modal.close('Save click')">Cerrar</button>
+    </div>
+</ng-template>
+

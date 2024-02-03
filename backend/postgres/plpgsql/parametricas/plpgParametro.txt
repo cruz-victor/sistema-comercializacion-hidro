@@ -1,0 +1,36 @@
+CREATE OR REPLACE FUNCTION parametro.obtener_codigos_por_contexto(p_contexto character varying)
+ RETURNS TABLE(codigo_contexto character varying)
+ LANGUAGE plpgsql
+AS $function$
+declare 
+	volumen_ejecutado numeric;	
+begin	
+	return query
+		select codigo
+		from parametro.parametro p
+		where p.contexto =p_contexto and 
+		fecha_inicio is not null and 
+		fecha_fin is null;	
+end 
+$function$
+;
+
+CREATE OR REPLACE FUNCTION parametro.obtener_valor_apartir_codigo(p_contexto character varying, p_codigo character varying)
+ RETURNS character varying
+ LANGUAGE plpgsql
+AS $function$
+declare 
+	resultado varchar;	
+begin	
+    resultado:=(select valor
+				from parametro.parametro p
+				where p.contexto = p_contexto and 
+				p.codigo = p_codigo and
+				fecha_inicio is not null and 
+				fecha_fin is null
+				limit 1);	
+	
+	return resultado;
+end 
+$function$
+;

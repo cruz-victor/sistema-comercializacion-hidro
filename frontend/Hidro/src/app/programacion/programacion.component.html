@@ -1,0 +1,140 @@
+<div class="container-fluid">
+    <h3>Programación de Volúmenes y Asignación de Zonas Comerciales</h3>
+    <hr>
+    <div class="card">
+        <div class="card-body">
+            <section class="fieldset">
+                <h1>Información Logística</h1>
+                <div class="form-group">
+                    <table class="table table-sm table-hover mt-3">
+                        <thead>
+                          <tr>
+                            <th scope="col">Componente</th>
+                            <th scope="col">Última actualización</th>
+                            <th scope="col">Carga de archivos para actualización</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Plan de Abastecimiento</td>
+                            <td>12/08/2021 16:00:00</td>
+                            <td>
+                                <input type="file" class="form-control btn-sm" (change)="addfile($event)" placeholder="Upload file" 
+                                       accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Capacidad de Almacenaje (Plantas)</td>
+                            <td>13/08/2021 09:59:00</td>
+                            <td>
+                                <input type="file" class="form-control btn-sm" (change)="addfile($event)" placeholder="Upload file" 
+                                       accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Demanda Mensual (ANH)</td>
+                            <td>15/08/2021 12:00:00</td>
+                            <td>
+                                <input type="file" class="form-control btn-sm" (change)="addfile($event)" placeholder="Upload file" 
+                                       accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Refinación</td>
+                            <td>17/08/2021 21:00:00</td>
+                            <td>
+                                <input type="file" class="form-control btn-sm" (change)="addfile($event)" placeholder="Upload file" 
+                                       accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                            </td>
+                          </tr>              
+                          <tr>
+                            <td>Saldos Distritos</td>
+                            <td>17/08/2021 23:59:59</td>
+                            <td>
+                                <input type="file" class="form-control btn-sm" (change)="addfile($event)" placeholder="Upload file" 
+                                       accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                            </td>
+                          </tr>              
+                          <tr>
+                            <td>Tránsito</td>
+                            <td>18/08/2021 17:18:00</td>
+                            <td>
+                                <input type="file" class="form-control btn-sm" (change)="addfile($event)" placeholder="Upload file" 
+                                       accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                            </td>
+                          </tr>  
+                        </tbody>
+                    </table>
+                </div>
+            </section>       
+
+            <section class="fieldset mt-3">
+                <h3>Notificaciones de carga de archivos</h3>
+                <textarea class="form-control mt-1 mb-1" aria-describedby="inputDescripcion" rows="3" maxlength ="500" 
+                [(ngModel)]="notificationsCarga" [ngModelOptions]="{standalone: true}" 
+                style="background-color: #4e5452; color: cornsilk; font-family: 'Courier New', Courier, monospace; font-size: small;"></textarea>
+                        </section>
+            <div class="card-footer" *ngIf="isUpdateable">
+                <div class="row text-right">
+                  <div class="col-md">
+                    <!-- <input class="btn btn-outline-primary btn-sm" type="submit" value="Actualizar"> -->
+                     
+                    <button type="button" class="btn btn-outline-primary btn-sm" (click)="guardar()"><i data-feather="truck"></i> Actualizar</button>
+                  </div>
+                </div>
+              </div>             
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <section class="fieldset">
+                <h1>Programación</h1>
+                <div class="row mt-3">
+                    <div class="col-md-1">
+                        Periodo:
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputFechaSuscripcion">Fecha Inicial:</span>
+                            </div>
+                            <input class="form-control" placeholder="dd/mm/aaaa" name="dp" ngbDatepicker #d="ngbDatepicker" 
+                                  [(ngModel)]="fechaInicio" [ngModelOptions]="{standalone: true}" (ngModelChange)="buildDateFechaInicio($event)">
+                            <div class="input-group-append">
+                              <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Fecha Final:</span>
+                            </div>
+                            <input class="form-control" placeholder="dd/mm/aaaa" name="dp" ngbDatepicker #df="ngbDatepicker" 
+                                  [(ngModel)]="fechaFin" [ngModelOptions]="{standalone: true}" (ngModelChange)="buildDateFechaFin($event)">
+                            <div class="input-group-append">
+                              <button class="btn btn-outline-secondary calendar" (click)="df.toggle()" type="button"></button>
+                            </div>
+                        </div>
+            
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-outline-dark btn-sm mr-3" (click)="programar()"
+                        href="../../assets/PROGR_2021.xls" download="PROGR_2021 (01-08-2021 al 29-08-2021).xls"
+                        ><i data-feather="file-text"></i> Programar</button>       
+                        <a href="../../assets/PROGR_2021.xls" download="PROGR_2021 (01-08-2021 al 29-08-2021).xls" *ngIf="isDownloadable">Descargar...</a>                 
+                    </div>
+                </div>
+            </section>
+
+            <section class="fieldset mt-3">
+                <h3>Notificaciones de la programación</h3>
+                <textarea class="form-control mt-1 mb-1" aria-describedby="inputDescripcion" rows="3" maxlength ="500" 
+                [(ngModel)]="notificationsProgramacion" [ngModelOptions]="{standalone: true}" 
+                style="background-color: black; color: cornsilk; font-family: 'Courier New', Courier, monospace; font-size: small;"></textarea>
+            </section>            
+        </div>
+    </div>
+
+</div>

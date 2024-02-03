@@ -1,0 +1,353 @@
+<div class="row">
+  <div class="col-md">
+    <h3>Presupuesto DCIM</h3>
+  </div>
+  <div class="col-md text-right ">
+    <div class="row">
+      <div class="col-md">
+        <p>Gestión actual: &nbsp;&nbsp; <strong>{{currentYear}}</strong></p>
+      </div>
+      <div class="col-md">
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelectSectorSector">Recuperar gestión anterior:</label>
+          </div>
+          <select class="custom-select" id="inputGroupSelectSectorSector" [(ngModel)]="currentYear" [ngModelOptions]="{standalone: true}">
+            <option>2020</option>
+            <option selected>2021</option>
+            <option>2022</option>
+            <!-- <option *ngFor="let op of sectores" [value]="op.codigo">{{op.valor}}</option> -->
+          </select>
+        </div>    
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="row fluid">
+    <div class="col-3">
+        <section class="fieldset mt-3">
+            <h1>Totales</h1>
+            <div class="card card-flyer mt-3">
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <div class="row">
+                      <div class="col-8">
+                        TOTAL<br><span class="badge badge-secondary">142</span>              
+                      </div>    
+                      <div class="col-4">
+                        <div class="stat text-primary mx-auto text-right">
+                          <i  data-feather="dollar-sign"></i> 
+                        </div>                 
+                      </div>
+                    </div>
+                  </h4>
+                  <div class="mb-3">
+                    <span class="text-muted">Max.: 572,000,000</span>                  
+                    <ngb-progressbar [showValue]="true" type="info" [value]="100"></ngb-progressbar>                  
+                  </div>
+                  <div class="mb-3">
+                    <span class="text-muted">Ejec.: 372,000,000</span>
+                    <ngb-progressbar [showValue]="true" type="success" [value]="65"></ngb-progressbar>                  
+                  </div>
+                  <div class="mb-0">
+                    <span class="text-muted">Saldo: 200,000,000</span>
+                    <ngb-progressbar [showValue]="true" type="dark" [value]="35"></ngb-progressbar>                  
+                  </div>
+                </div>
+              </div>      
+        </section>
+    
+    </div>
+    <div class="col-9">
+        <section class="fieldset mt-3">
+            <h1>Servicios</h1>
+            <div class="row">
+                <div class="col">
+                  <div class="card card-flyer mt-3">
+                      <div class="card-body">
+                        <h4 class="card-title">
+                          <div class="row">
+                            <div class="col-8">
+                              Transporte<br><span class="badge badge-secondary">80</span>              
+                            </div>
+                            <div class="col-4">
+                              <div class="stat text-primary mx-auto text-right">
+                                <i  data-feather="dollar-sign"></i> 
+                              </div>                 
+                            </div>
+                          </div>
+                        </h4>
+                        <div class="mb-3">
+                          <span class="text-muted">Max.: 125,000,000</span>                  
+                          <ngb-progressbar [showValue]="true" type="info" [value]="22"></ngb-progressbar>                  
+                        </div>
+                        <div class="mb-3">
+                          <span class="text-muted">Ejec.: 90,000,000</span>
+                          <ngb-progressbar [showValue]="true" type="success" [value]="72"></ngb-progressbar>                  
+                        </div>
+                        <div class="mb-0">
+                          <span class="text-muted">Saldo: 35,000,000</span>
+                          <ngb-progressbar [showValue]="true" type="warning" [value]="28"></ngb-progressbar>                  
+                        </div>
+                      </div>
+                    </div>    
+                </div>
+                <div class="col">
+                  <div class="card card-flyer mt-3">
+                      <div class="card-body">
+                        <h4 class="card-title">
+                          <div class="row">
+                            <div class="col-8">
+                              Suministro<br><span class="badge badge-secondary">20</span>              
+                            </div>
+                            <div class="col-4">
+                              <div class="stat text-primary mx-auto text-right">
+                                <i  data-feather="dollar-sign"></i> 
+                              </div>                 
+                            </div>
+                          </div>
+                        </h4>
+                        <div class="mb-3">
+                          <span class="text-muted">Max.: 250,000,000</span>                  
+                          <ngb-progressbar [showValue]="true" type="info" [value]="44"></ngb-progressbar>                  
+                        </div>
+                        <div class="mb-3">
+                          <span class="text-muted">Ejec.: 210,000,000</span>
+                          <ngb-progressbar [showValue]="true" type="success" [value]="84"></ngb-progressbar>                  
+                        </div>
+                        <div class="mb-0">
+                          <span class="text-muted">Saldo: 40,000,000</span>
+                          <ngb-progressbar [showValue]="true" type="danger" [value]="16"></ngb-progressbar>                  
+                        </div>
+                      </div>
+                    </div>       
+                </div>
+                <div class="col">
+                  <div class="card card-flyer mt-3">
+                      <div class="card-body">
+                        <h4 class="card-title">
+                          <div class="row">
+                            <div class="col-8">
+                              Compra<br><span class="badge badge-secondary">30</span>              
+                            </div>
+                            <div class="col-4">
+                              <div class="stat text-primary mx-auto text-right">
+                                <i  data-feather="dollar-sign"></i> 
+                              </div>                 
+                            </div>
+                          </div>
+                        </h4>
+                        <div class="mb-3">
+                          <span class="text-muted">Max.: 132,000,000</span>                  
+                          <ngb-progressbar [showValue]="true" type="info" [value]="23"></ngb-progressbar>                  
+                        </div>
+                        <div class="mb-3">
+                          <span class="text-muted">Ejec.: 32,000,000</span>
+                          <ngb-progressbar [showValue]="true" type="success" [value]="24"></ngb-progressbar>                  
+                        </div>
+                        <div class="mb-0">
+                          <span class="text-muted">Saldo: 100,000,000</span>
+                          <ngb-progressbar [showValue]="true" type="dark" [value]="76"></ngb-progressbar>                  
+                        </div>
+                      </div>
+                    </div> 
+                </div>
+                <div class="col">
+                  <div class="card card-flyer mt-3">
+                      <div class="card-body">
+                        <h4 class="card-title">
+                          <div class="row">
+                            <div class="col-8">
+                              Otros<br><span class="badge badge-secondary">12</span>              
+                            </div>
+                            <div class="col-4">
+                              <div class="stat text-primary mx-auto text-right">
+                                <i  data-feather="dollar-sign"></i> 
+                              </div>                 
+                            </div>
+                          </div>
+                        </h4>
+                        <div class="mb-3">
+                          <span class="text-muted">Max.: 65,000,000</span>                  
+                          <ngb-progressbar [showValue]="true" type="info" [value]="11"></ngb-progressbar>                  
+                        </div>
+                        <div class="mb-3">
+                          <span class="text-muted">Ejec.: 40,000,000</span>
+                          <ngb-progressbar [showValue]="true" type="success" [value]="62"></ngb-progressbar>                  
+                        </div>
+                        <div class="mb-0">
+                          <span class="text-muted">Saldo: 25,000,000</span>
+                          <ngb-progressbar [showValue]="true" type="dark" [value]="38"></ngb-progressbar>                  
+                        </div>
+                      </div>
+                    </div>               
+                </div>
+              </div>    
+        </section>
+    
+    </div>
+</div>
+
+<div class="row fluid">
+    <div class="col-12">
+        <section class="fieldset mt-3">
+            <h1>Conceptos</h1>    
+            <div class="row">
+                <div class="col">
+                  <div class="card card-flyer mt-3">
+                    <div class="card-body">
+                      <h4 class="card-title">
+                        <div class="row">
+                          <div class="col-8">
+                            Contrato<br><span class="badge badge-secondary">89</span>              
+                          </div>
+                          <div class="col-4">
+                            <div class="stat text-primary mx-auto text-right">
+                              <i  data-feather="dollar-sign"></i> 
+                            </div>                 
+                          </div>
+                        </div>
+                      </h4>
+                      <div class="mb-3">
+                        <span class="text-muted">Max.: 360,000,000</span>                  
+                      </div>
+                      <div class="mb-3">
+                        <span class="text-muted">Ejec.: 234,000,000</span>
+                      </div>
+                      <div class="mb-3">
+                        <span class="text-muted">Saldo: 126,000,000</span>
+                      </div>
+                      <div class="mb-0">
+                          <ngb-progressbar [showValue]="true" [striped]="true" type="primary" [value]="63"></ngb-progressbar>
+                      </div>
+                    </div>
+                  </div>  
+                </div>
+                <div class="col">
+                  <div class="card card-flyer mt-3">
+                      <div class="card-body">
+                        <h4 class="card-title">
+                          <div class="row">
+                            <div class="col-8">
+                              Adenda<br><span class="badge badge-secondary">17</span>              
+                            </div>
+                            <div class="col-4">
+                              <div class="stat text-primary mx-auto text-right">
+                                <i  data-feather="dollar-sign"></i> 
+                              </div>                 
+                            </div>
+                          </div>
+                        </h4>
+                        <div class="mb-3">
+                          <span class="text-muted">Max.: 69,000,000</span>                  
+                        </div>
+                        <div class="mb-3">
+                          <span class="text-muted">Ejec.: 45,000,000</span>
+                        </div>
+                        <div class="mb-3">
+                          <span class="text-muted">Saldo: 24,000,000</span>
+                        </div>
+                        <div class="mb-0">
+                          <ngb-progressbar [showValue]="true" [striped]="true" type="primary" [value]="12"></ngb-progressbar>
+                        </div>                  
+                      </div>
+                    </div>    
+                </div>
+                <div class="col">
+                  <div class="card card-flyer mt-3">
+                      <div class="card-body">
+                        <h4 class="card-title">
+                          <div class="row">
+                            <div class="col-8">
+                              Incremento<br><span class="badge badge-secondary">16</span>              
+                            </div>
+                            <div class="col-4">
+                              <div class="stat text-primary mx-auto text-right">
+                                <i  data-feather="dollar-sign"></i> 
+                              </div>                 
+                            </div>
+                          </div>
+                        </h4>
+                        <div class="mb-3">
+                          <span class="text-muted">Max.: 63,000,000</span>                  
+                        </div>
+                        <div class="mb-3">
+                          <span class="text-muted">Ejec.: 41,000,000</span>
+                        </div>
+                        <div class="mb-3">
+                          <span class="text-muted">Saldo: 22,000,000</span>
+                        </div>
+                        <div class="mb-0">
+                          <ngb-progressbar [showValue]="true" [striped]="true" type="primary" [value]="11"></ngb-progressbar>
+                        </div>                    
+                      </div>
+                    </div>       
+                </div>
+                <div class="col">
+                  <div class="card card-flyer mt-3">
+                      <div class="card-body">
+                        <h4 class="card-title">
+                          <div class="row">
+                            <div class="col-8">
+                              Actualización<br><span class="badge badge-secondary">11</span>              
+                            </div>
+                            <div class="col-4">
+                              <div class="stat text-primary mx-auto text-right">
+                                <i  data-feather="dollar-sign"></i> 
+                              </div>                 
+                            </div>
+                          </div>
+                        </h4>
+                        <div class="mb-3">
+                          <span class="text-muted">Max.: 46,000,000</span>                  
+                        </div>
+                        <div class="mb-3">
+                          <span class="text-muted">Ejec.: 30,000,000</span>
+                        </div>
+                        <div class="mb-3">
+                          <span class="text-muted">Saldo: 16,000,000</span>
+                        </div>
+                        <div class="mb-0">
+                          <ngb-progressbar [showValue]="true" [striped]="true" type="primary" [value]="8"></ngb-progressbar>
+                        </div>                    
+                      </div>
+                    </div> 
+                </div>
+                <div class="col">
+                  <div class="card card-flyer mt-3">
+                      <div class="card-body">
+                        <h4 class="card-title">
+                          <div class="row">
+                            <div class="col-8">
+                              Reversión<br><span class="badge badge-secondary">9</span>              
+                            </div>
+                            <div class="col-4">
+                              <div class="stat text-primary mx-auto text-right">
+                                <i  data-feather="dollar-sign"></i> 
+                              </div>                 
+                            </div>
+                          </div>
+                        </h4>
+                        <div class="mb-3">
+                          <span class="text-muted">Max.: 34,000,000</span>                  
+                        </div>
+                        <div class="mb-3">
+                          <span class="text-muted">Ejec.: 22,000,000</span>
+                        </div>
+                        <div class="mb-3">
+                          <span class="text-muted">Saldo: 12,000,000</span>
+                        </div>
+                        <div class="mb-0">
+                          <ngb-progressbar [showValue]="true" [striped]="true" type="primary" [value]="6"></ngb-progressbar>
+                        </div>                  
+                      </div>
+                    </div>               
+                </div>
+              </div>                    
+        </section>
+    </div>
+</div>
+

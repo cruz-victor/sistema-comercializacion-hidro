@@ -1,0 +1,266 @@
+<div class="container">
+
+    <h3>Certificación Presupuestaria</h3>
+    <hr>
+    <form (ngSubmit)="submit()">
+        <div class="card">
+            <div class="card-body">
+
+              <!-- <div class="row">
+                <div class="col-md-8">
+                  <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="inputGroupSelectPartidasP">Certificaciones Presupuestarias existentes:</label>
+                    </div>
+                    <select class="custom-select" id="inputGroupSelectPartidasP" #t (change)="onChangeCertificacion(t.value)"
+                            [(ngModel)]="certificacionSeleccionada" [ngModelOptions]="{standalone: true}">
+                      <option value=0>(Nueva Certificación)</option>
+                      <option *ngFor="let pp of parametricaAllCertificaciones" [value]="pp.id">{{pp.descripcion}}</option>
+                    </select>
+                  </div>                  
+                </div>              
+              </div>
+              <hr>   -->
+
+              <div class="row">
+                    <div class="col-md-4">
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                              <label class="input-group-text" for="inputGroupSelectSectorSector">Concepto:</label>
+                            </div>
+                            <select class="custom-select" id="inputGroupSelectSectorSector" #c (change)="onChangeConcepto(c.value)"
+                                    [(ngModel)]="certificacion.concepto" [ngModelOptions]="{standalone: true}">
+                              <option value=''>Seleccionar...</option>
+                              <option *ngFor="let param of parametricaConceptos" [value]="param.id">{{param.descripcion}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="input-group input-group-sm mb-3" *ngIf="!isAdenda">
+                            <div class="input-group-prepend">
+                              <label class="input-group-text" for="inputGroupSelectProceso">Proceso de Contratación:</label>
+                            </div>
+                            <select class="custom-select" id="inputGroupSelectProceso" 
+                                    [(ngModel)]="certificacion.idProcesoContratacion" [ngModelOptions]="{standalone: true}">
+                              <option value=0>Seleccionar...</option>
+                              <option *ngFor="let op of parametricaProcesosContratacion" [value]="op.id">{{op.descripcion}}</option>
+                            </select>
+                        </div>                      
+
+
+                        <div class="input-group input-group-sm mb-3" *ngIf="isAdenda">
+                          <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelectContrato">Contrato:</label>
+                          </div>
+                          <select class="custom-select" id="inputGroupSelectContrato" 
+                                  [(ngModel)]="certificacion.idContrato" [ngModelOptions]="{standalone: true}">
+                            <option value=0>Seleccionar...</option>
+                            <option *ngFor="let op of parametricaContratos" [value]="op.id">{{op.descripcion}}</option>
+                          </select>
+                      </div>                        
+                    </div>
+                 
+              </div>
+
+              <div class="row">
+                    <div class="col-md-4">
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                              <label class="input-group-text" for="inputGroupSelectSectorSector">Tipo de Servicio:</label>
+                            </div>
+                            <select class="custom-select" id="inputGroupSelectSectorSector" 
+                                    [(ngModel)]="certificacion.tipoServicio" [ngModelOptions]="{standalone: true}">
+                              <option>Seleccionar...</option>
+                              <option *ngFor="let param of parametricaTipoServicio" [value]="param.id">{{param.descripcion}}</option>
+                            </select>
+                        </div>
+                    </div>
+                  <div class="col-md-4">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                          <label class="input-group-text" for="inputGroupSelectProceso">Número de Partida:</label>
+                        </div>
+                        <select class="custom-select" id="inputGroupSelectProceso" 
+                                [(ngModel)]="certificacion.idPartida" [ngModelOptions]="{standalone: true}">
+                          <option value=0>Seleccionar...</option>
+                          <option *ngFor="let op of parametricaPartidas" [value]="op.id">{{op.descripcion}}</option>                 
+                        </select>
+                      </div> 
+                  </div>
+                  <!-- <div class="col-md-4">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputCategoria">Categoria:</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputCategoria" readonly="true"
+                            [(ngModel)]="certificacion.categoria" [ngModelOptions]="{standalone: true}">
+                    </div>                      
+                  </div>  -->
+              </div>
+
+              <div class="row">
+                    <div class="col-md-4">
+
+
+
+                        <div class="input-group input-group-sm mb-3" *ngIf="!isReduced">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="inputNumeroCertificacion">Número de Certificación:</span>
+                            </div>
+                            <input type="text" class="form-control" aria-describedby="inputNumeroCertificacion" 
+                                [(ngModel)]="certificacion.numeroCertificacion" [ngModelOptions]="{standalone: true}">
+                        </div>
+
+
+
+                        
+                        <div class="input-group input-group-sm mb-3" *ngIf="isReduced">
+                          <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelectNumeroCertificacion">Número de Certificación:</label>
+                          </div>
+                          <select class="custom-select" id="inputGroupSelectNumeroCertificacion" 
+                                  [(ngModel)]="certificacion.numeroCertificacion" [ngModelOptions]="{standalone: true}">
+                            <option value=0>Seleccionar...</option>
+                            <option *ngFor="let op of parametricaCertificaciones" [value]="op.id">{{op.descripcion}}</option>                 
+                          </select>
+                        </div> 
+
+
+
+
+                    </div>  
+                    <div class="col-md-8">
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="inputDescripcion">Descripción:</span>
+                            </div>
+                            <input type="text" class="form-control" aria-describedby="inputDescripcion" 
+                                [(ngModel)]="certificacion.descripcion" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>  
+              </div>
+
+              <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="inputMontoMaximo">Monto Máximo:</span>
+                            </div>
+                            <input type="number" class="form-control" aria-describedby="inputMontoMaximo" (change)="onChangeMonto()"
+                                [(ngModel)]="certificacion.montoMaximo" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="input-group input-group-sm mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputMontoEjecutado">Monto Ejecutado:</span>
+                          </div>
+                          <input type="number" class="form-control" aria-describedby="inputMontoEjecutado" readonly="true"
+                              [(ngModel)]="certificacion.montoEjecutado" [ngModelOptions]="{standalone: true}">
+                      </div>
+                    </div>                    
+                    <div class="col-md-4">
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="inputSaldo">Saldo:</span>
+                            </div>
+                            <input type="number" class="form-control" aria-describedby="inputSaldo" readonly="true"
+                                [(ngModel)]="certificacion.saldo" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>                    
+
+              </div>
+
+              <div class="row">
+                  <div class="col-md-4">
+                    <div class="input-group input-group-sm mb-3">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputFechaSuscripcion">Fecha de Emisión:</span>
+                      </div>
+                      <input class="form-control" placeholder="dd/mm/aaaa" name="dp" ngbDatepicker #d="ngbDatepicker" readonly="true"
+                            [(ngModel)]="fechaEmision" [ngModelOptions]="{standalone: true}" (ngModelChange)="buildDateEmision($event)">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                      </div>
+                    </div> 
+                  </div>
+                  
+                  <div class="col-md-8">
+                    <div class="row" *ngIf="!isReduced">
+                      <div class="input-group input-group-sm ">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputSaldo">Lotes:</span>
+                        </div>
+                        <div class="col-md-2" *ngFor="let item of lotesTransporte">
+                          <div class="input-group input-group-sm ">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <input type="checkbox" aria-label="Checkbox" value="{{item.id}}" #k (change)="onChangeLote(k.value, $event)" 
+                                       [checked]="item.checked">
+                              </div>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Text" value="{{item.lote}}" readonly="true">
+                          </div>                
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+
+                <!-- <hr> -->
+
+                <!-- <div class="row">
+                    <div class="col-md">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFileLang" lang="es">
+                        <label class="custom-file-label" for="customFileLang">Seleccionar archivo digital de la Certificación Presupuestaria</label>
+                    </div>
+                  </div>
+                </div> -->
+
+                <div *ngIf="!isNew">
+                  <hr>
+                  <div class="row">
+                    <div class="col-md">
+                      <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputJustificacion">Justificación de cambio (<span class="text-danger font-weight-bold">*</span>):</span>
+                        </div>
+                        <textarea class="form-control" aria-describedby="inputJustificacion" rows="2" maxlength ="200"
+                                  [ngClass]="{ 'is-invalid': submittedJustificacion }"
+                                  [(ngModel)]="justificacionCambio" [ngModelOptions]="{standalone: true}"></textarea>
+                    </div>                
+                    </div>                  
+                  </div>
+                </div>
+
+
+
+            </div>
+        
+            <div class="card-footer">
+              <div class="row justify-content-end">
+                <div class="col-md-1">
+                  <input class="btn btn-outline-primary btn-sm" type="submit" value="Guardar">
+                </div>
+              </div>
+            </div>            
+        </div>
+    </form>
+
+
+
+
+
+
+</div>
+
+<!-- 
+<hr>
+{{certificacion|json}} -->
+
+
+
+

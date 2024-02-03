@@ -1,0 +1,190 @@
+<div class="container">
+    <h3>Lotes de Transporte Nacional</h3>
+    <hr>    
+
+    <form (ngSubmit)="submit()">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-5">
+                    <div class="row">
+
+                        <div class="col-md">
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGestio">Gestión:</span>
+                                </div>
+                                <input  type="number" class="form-control" aria-describedby="inputGestio"
+                                        [(ngModel)]="lotecillo.gestion" [ngModelOptions]="{standalone: true}">
+                            </div>
+                        </div>
+
+                        <div class="col-md">
+                            <div class="input-group input-group-sm mb-3">
+                              <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelectLotecillo">Lote:</label>
+                              </div>
+                              <select class="custom-select" id="inputGroupSelectLotecillo" (ngModelChange)="loteChanged($event)"
+                                      [(ngModel)]="lotecillo.lote" [ngModelOptions]="{standalone: true}">
+                                <option value=0>Seleccionar...</option>
+                                <option *ngFor="let lote of lotesTransInter" [value]="lote.id">{{lote.lote}}</option>
+                              </select>
+                            </div>  
+                        </div>        
+
+            </div>
+                </div>
+
+                <div class="col-7">
+                    <div class="row">
+                <div class="col-md">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputFechaSuscripcion">Fecha de Inicio:</span>
+                        </div>
+                        <input class="form-control" placeholder="dd/mm/aaaa" name="dp" ngbDatepicker #d="ngbDatepicker" 
+                              [(ngModel)]="fechaInicio" [ngModelOptions]="{standalone: true}" (ngModelChange)="buildDateFechaInicio($event)">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Fecha Finalización:</span>
+                        </div>
+                        <input class="form-control" placeholder="dd/mm/aaaa" name="dp" ngbDatepicker #df="ngbDatepicker" 
+                              [(ngModel)]="fechaFin" [ngModelOptions]="{standalone: true}" (ngModelChange)="buildDateFechaFin($event)">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary calendar" (click)="df.toggle()" type="button"></button>
+                        </div>
+                    </div>
+        
+                </div>
+                </div>  
+            </div>
+            </div>    
+            
+            
+
+
+
+
+            
+            
+
+
+            <h6>Tramos Principales:</h6>
+            <table class="table table-striped table-bordered">    
+            <thead>    
+                <tr>    
+                <th></th>    
+                <th>Punto de Recepción</th>    
+                <!-- <th>Frontera</th>     -->
+                <th>Punto de Entrega</th>   
+                <th>Tarifa</th> 
+            </tr>    
+            </thead>    
+            <tbody>    
+                <tr *ngFor="let itemTramo of lotecillo.tramos.principales; let i = index;">    
+                <td>    
+                    <a class="badge badge-secondary" (click)="deleteRowTramoPrincipal(i)">Eliminar</a>
+                </td>   
+                <td>    
+                    <select class="custom-select" [(ngModel)]="lotecillo.tramos.principales[i].puntoRecepcion" [ngModelOptions]="{standalone: true}">
+                    <option>Seleccionar...</option>
+                    <option *ngFor="let op of puntoRecepciones" [value]="op.codigo">{{op.valor}}</option>
+                    </select>
+                </td>    
+                <!-- <td>    
+                    <select class="custom-select" [(ngModel)]="lotecillo.tramos.principales[i].frontera" [ngModelOptions]="{standalone: true}">
+                    <option>Seleccionar...</option>
+                    <option *ngFor="let op of fronteras" [value]="op.codigo">{{op.valor}}</option>
+                    </select>              
+                </td>     -->
+                <td>    
+                    <select class="custom-select" [(ngModel)]="lotecillo.tramos.principales[i].puntoEntrega" [ngModelOptions]="{standalone: true}">
+                    <option>Seleccionar...</option>
+                    <option *ngFor="let op of puntoEntregas" [value]="op.codigo">{{op.valor}}</option>
+                    </select>               
+                </td>     
+                <td>    
+                    <input  type="number" class="form-control" 
+                            [(ngModel)]="lotecillo.tramos.principales[i].tarifa" [ngModelOptions]="{standalone: true}">             
+                </td>     
+                </tr>   
+                <tr>
+                <td colspan="5" class="text-left">
+                    <a class="badge badge-success" (click)="addRowTramoPrincipal()">Adicionar Tramo Principal</a>
+                </td>
+                </tr>
+            </tbody>   
+            </table> 
+
+            <h6>Tramos Secundarios:</h6>
+            <table class="table table-striped table-bordered">    
+            <thead>    
+            <tr>    
+                <th></th>    
+                <th>Punto de Recepción</th>    
+                <!-- <th>Frontera</th>     -->
+                <th>Punto de Entrega</th>    
+                <th>Tarifa</th>    
+            </tr>    
+            </thead>    
+            <tbody>    
+            <tr *ngFor="let itemTramo of lotecillo.tramos.secundarios; let k = index;">    
+                <td>    
+                    <a class="badge badge-secondary" (click)="deleteRowTramoSecundario(k)">Eliminar</a> 
+                </td>    
+                <td>    
+                <select class="custom-select" [(ngModel)]="lotecillo.tramos.secundarios[k].puntoRecepcion" [ngModelOptions]="{standalone: true}">
+                    <option>Seleccionar...</option>
+                    <option *ngFor="let op of puntoRecepciones" [value]="op.codigo">{{op.valor}}</option>
+                </select>
+                </td>    
+                <!-- <td>    
+                <select class="custom-select" [(ngModel)]="lotecillo.tramos.secundarios[k].frontera" [ngModelOptions]="{standalone: true}">
+                    <option>Seleccionar...</option>
+                    <option *ngFor="let op of fronteras" [value]="op.codigo">{{op.valor}}</option>
+                </select>              
+                </td>     -->
+                <td>    
+                <select class="custom-select" [(ngModel)]="lotecillo.tramos.secundarios[k].puntoEntrega" [ngModelOptions]="{standalone: true}"> 
+                    <option>Seleccionar...</option>
+                    <option *ngFor="let op of puntoEntregas" [value]="op.codigo">{{op.valor}}</option>
+                </select>               
+                </td>                
+                <td>    
+                    <input  type="number" class="form-control" 
+                            [(ngModel)]="lotecillo.tramos.secundarios[k].tarifa" [ngModelOptions]="{standalone: true}">             
+                </td>              
+            </tr>     
+                <tr>
+                <td colspan="4" class="text-left">
+                    <a class="badge badge-info" (click)="addRowTramoSecundario()">Adicionar Tramo Secundario</a>
+                </td>
+                </tr>                        
+            </tbody>   
+            </table> 
+
+        </div>
+        <div class="card-footer">
+            <div class="row justify-content-end">
+              <div class="col-md-1">
+                <input class="btn btn-outline-primary btn-sm" type="submit" value="Guardar">
+              </div>
+            </div>
+          </div>
+    </div>
+    </form>
+
+</div>
+
+<!-- {{  tramosLote |json}} -->
+
+<!-- ::::{{entregas|json}} -->
+
+<!-- {{puntoRecepciones|json}} -->
+

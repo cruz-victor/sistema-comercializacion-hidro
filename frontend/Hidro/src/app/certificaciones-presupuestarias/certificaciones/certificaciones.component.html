@@ -1,0 +1,103 @@
+<div class="container-fluid">
+  <div class="col-md">
+    <h3>Certificaciones Presupuestarias</h3>
+    <hr>
+  </div>
+  <form>
+    <div class="card">
+      <div class="card-body">
+        <div class="row mb-3">
+          <div class="col-md">
+            <div class="  -group form-inline">
+                Buscar: <input class="form-control ml-2" stype="text" name="searchTerm" [(ngModel)]="service.searchTerm"/>
+                <span class="ml-3" *ngIf="service.loading$ | async">
+                  cargando...
+                  <div class="spinner-border text-primary" role="status">
+                  </div>                  
+                </span>
+            </div>
+          </div>
+          <div class="col-md text-right">
+            <button type="button" class="btn btn-outline-dark" (click)="openitnew(content)">Nueva Certificación</button>
+          </div>
+        </div>
+
+        <table class="table table-striped table-sm table-hover" >
+           
+          <thead>
+          <tr>
+            <!-- <th scope="col"></th> -->
+            <!-- <th scope="col" sortable="numero" (sort)="onSort($event)">Número</th>
+            <th scope="col" sortable="fechaSuscripcion" (sort)="onSort($event)">Suscripción</th>
+            <th scope="col" sortable="fechaVigencia" (sort)="onSort($event)">Vigencia</th>
+            <th></th>
+            <th scope="col" sortable="descripcion" (sort)="onSort($event)">Descripción</th>
+            <th scope="col" sortable="volumenEjecutado" (sort)="onSort($event)">Vol. Ejec.</th>
+            <th scope="col">Saldo Adj.</th>
+
+            <th scope="col"></th>
+            <th scope="col"></th> -->
+            
+
+            <th scope="col">id</th>
+            <th scope="col">Concepto</th>
+            <th scope="col">Tipo Servicio</th>            
+            <th scope="col">Fecha Emisión</th>
+            <th scope="col">Número</th>
+            <th scope="col">Descripción</th>
+            <th scope="col" class="text-right">Monto Máximo</th>
+            <th scope="col" class="text-right">Monto Ejecutado</th>
+            <th scope="col" class="text-right">Saldo</th>
+
+
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let certi of certificaciones$ | async" (click)="openit(content, certi.id)">
+            <td>{{certi.id}}</td>
+            <td>{{certi.concepto}}</td>
+            <td>{{certi.tipoServicio}}</td>            
+            <td>{{certi.fechaEmision}}</td>
+            <td><ngb-highlight [result]="certi.numeroCertificacion" [term]="service.searchTerm"></ngb-highlight></td>
+            <td><ngb-highlight [result]="certi.descripcion" [term]="service.searchTerm"></ngb-highlight></td>
+            <td class="text-right">{{certi.montoMaximo | number : '1.2-2'}}</td>
+            <td class="text-right">{{certi.montoEjecutado | number : '1.2-2'}}</td>
+            <td class="text-right">{{certi.saldo | number : '1.2-2'}}</td>
+          </tr>
+       </tbody>
+        </table>          
+      
+        <div class="d-flex justify-content-between p-2">
+          <ngb-pagination
+            [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
+          </ngb-pagination>
+      
+          <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+            <option [ngValue]="7">7 ítems por página</option>
+            <option [ngValue]="12">12 ítems por página</option>
+            <option [ngValue]="18">18 ítems por página</option>
+          </select>
+
+        </div>            
+
+      </div>
+    </div>        
+  </form>    
+
+
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <app-certificacion idCertificacion={{idCertific}}></app-certificacion>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-link" (click)="modal.close('Save click')">Cerrar</button>
+    </div>
+</ng-template>
+
